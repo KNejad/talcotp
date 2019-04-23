@@ -12,20 +12,31 @@ class TalcOTP
     end
   end
 
-  def codes
+  def all_codes_string
     output = ''
     @accounts.each do |account|
-      account_settings = {
-        interval: account['period'],
-        digits: account['digits'],
-        digest: account['algorithm']
-      }
-      auth_code = ROTP::TOTP.new(account['secret'], account_settings).now
+      account_auth_code = auth_code(account)
 
-      output += "#{account['label']}: #{auth_code}\n"
+      output += "#{account['label']}: #{account_auth_code}\n"
     end
 
     output
+  end
+
+  def [](account_name)
+    account = @accounts.find { |account| account["label"] == account_name }
+    return auth_code(account)
+  end
+
+  private
+
+  def auth_code(account)
+    account_settings = {
+      interval: account['period'],
+      digits: account['digits'],
+      digest: account['algorithm']
+    }
+    return ROTP::TOTP.new(account['secret'], account_settings).now
   end
 end
 

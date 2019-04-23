@@ -2,5 +2,18 @@
 
 $: << File.expand_path('../../lib', __FILE__)
 require "talcotp"
+require "clipboard"
 
-puts TalcOTP.new(ARGV[0]).codes
+unless ARGV[0]
+  puts "NO!"
+  return
+end
+
+code_manager = TalcOTP.new(ARGV[0])
+
+if (ARGV[1])
+  Clipboard.copy code_manager[ARGV[1]]
+  puts ARGV[1] + " code copied to clipboard"
+else
+  puts code_manager.all_codes_string
+end
