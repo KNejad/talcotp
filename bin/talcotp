@@ -5,7 +5,7 @@ require "talcotp"
 require "clipboard"
 
 unless ARGV[0]
-  puts "NO!"
+  puts "You must pass in a file name as the first argument"
   return
 end
 

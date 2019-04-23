@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "talcotp"
-  s.version     = 0.3
+  s.version     = "0.3.1"
   s.license     = "MIT"
   s.authors     = ["Keeyan Nejad"]
   s.email       = ["keeyan@keeyan.xyz"]
